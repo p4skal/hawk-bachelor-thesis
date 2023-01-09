@@ -1,0 +1,233 @@
+% ----------------------------------------------------------------------
+%                   LATEX TEMPLATE FOR PhD THESIS
+% ----------------------------------------------------------------------
+
+% based on Harish Bhanderi's PhD/MPhil template, then Uni Cambridge
+% http://www-h.eng.cam.ac.uk/help/tpl/textprocessing/ThesisStyle/
+% corrected and extended in 2007 by Jakob Suckale, then MPI-CBG PhD programme
+% and made available through OpenWetWare.org - the free biology wiki
+% and finally modified in 2015-2017 by Holger Nahrstaedt
+% https://github.com/holgern/TUB_PhDThesisTemplate
+
+%: Style file for Latex
+% Most style definitions are in the external file PhDthesisTUB.
+% In this template package, it can be found in ./Classes/
+
+\documentclass[twoside,11pt,online,a4paper,pdfa1,custommargin,numbered,biblatex]{Classes/PhDthesisTUB}
+% *********************** Choosing pdfx standard ******************************
+% `pdfa1'
+% `pdfa2'
+% `pdfx3'
+% *********************** Change Thesis-Language to German ******************************
+% default is english
+% `german' : language is set to german
+%
+% % *********************** Choosing oneside / twoside ******************************
+% `oneside' : layout is optimized for one-side print
+% `twoside' : layout is optimized for two-side print
+% *********************** Choosing print / online ******************************
+% `print' : pdf-file is optimized for print
+% `online' : pdf-file is optimized for online submission. The links are colorfull.
+% *********************** Choosing biblatex or bibtex ******************
+% `biblatex' : biblatex is used. Biblatex is automatically set when using xetex
+%
+% *********************** Choosing bibliographystyle ******************
+% `numbered' : (default option) e.g. [1], [2]
+% `authoryear' :  e.g. Name (2008)
+% `custombib' : Use your own style, which is defined in preamble.tex
+% *********************** Choosing the Fonts size ******************
+% `9pt'
+% `10pt'
+% `11pt'
+% `12pt'
+% *********************** Choosing the paper size ******************
+% `letterpaper'
+% `a4paper'
+% `a5paper'
+% *********************** Choosing the Fonts in Class Options when using pdflatex ******************
+% 
+%  On Windows, the packge cm-super has to be installed!
+%
+% `' :  computer modern
+% `fontA' :  newtxmath
+% `fontB' :  cmbright
+% `fontC' :  libertine,newtxmath
+% `fontD' :  concmath
+% `fontE' :  iwona
+% `fontF' :  kurier	
+% `fontG' :  anttor
+% `fontH' :  kmath,kerkis
+% `fontI' :   mathdesign (Utopia)
+% `fontJ' :  fouriernc
+% `fontK' :  pxfonts
+% `fontL' :  mathpazo
+% `fontM' :  mathpple
+% `fontN' :  txfonts
+% `fontO' :  mathtime (Belleek)
+% `fontP' :  mathptmx	times	
+% `fontQ' :  mbtimes	omega
+% `fontR' :  arev
+% `fontS' :  mathdesign (Charter)	
+% `fontT' :  comicsans
+% `fontU' :  mathdesign (Garamond)
+% `fontV' :  fourier	utopia
+% `fontW' :  ccfonts,eulervm
+%
+% `customfont': Use `customfont' option in the document class and load the
+% package in the preamble.tex
+%
+% default or leave empty: `Latin Modern' font will be loaded.
+%
+% *********************** Choosing the Fonts in Class Options when using xelatex/lualatex ***********
+%
+% `' :  computer modern
+% `fontA' :  XITS - XITS Math
+% `fontB': Cambria - Cambria Math
+% 'fontC': Libertinus - Libertinus Math
+% 'fontD': TeX Gyre Pagella - Asana Math
+% 'fontE': TeX Gyre Pagella - TeX Gyre Pagella Math
+% 'fontF': TeX Gyre Schola - TeX Gyre Schola Math
+% 'fontG': TeX Gyre Termes - TeX Gyre Termes Math
+% 'fontH': TeX Gyre Bonum - TeX Gyre Bonum Math
+% 'fontI': DejaVu Sans - TeX Gyre DejaVu Math
+%
+% `customfont': Use `customfont' option in the document class and load the
+% package in the preamble.tex
+%
+% default or leave empty: `Latin Modern' font will be loaded.
+%
+% ************************* Custom Page Margins ********************************
+%
+% `custommargin`: Use `custommargin' in options to activate custom page margins,
+% which can be defined in the preamble.tex. Custom margin will override
+% print/online margin setup.
+%
+% ************************* other options ********************************
+% `abstract`: Only the title-page and the abstracts are generated
+%
+
+\include{Preamble/preamble}
+\include{thesis-info}
+
+%: ----------------------- set languange ------------------------
+\ifCLASSINFOlangDE
+\selectlanguage{german}
+\else
+\selectlanguage{english}
+\fi
+% ***************************** Abstract Separate ******************************
+% To printout only the titlepage and the abstract with the PhD title and the
+% author name for submission to the Student Registry, use the `abstract' option in
+% the document class.
+
+\ifdefineAbstract
+ \pagestyle{empty}
+ \includeonly{0_frontmatter/zusammenfassung, 0_frontmatter/abstract}
+\fi
+
+%: ----------------------- generate glossary ------------------------
+\begin{document}
+
+
+
+%: ----------------------- generate cover page ------------------------
+\frontmatter
+% \maketitle generates a title page for the final submission
+% \makepretitle generates a title page for evaluation process
+% title and author... can be set in thesis-info.tex
+\phantomsection
+\addcontentsline{toc}{chapter}{Title Page}
+\maketitle
+%\makepretitle
+
+%: ----------------------- Choose spacing ------------------------
+%\singlespacing
+\onehalfspacing
+%\doublespacing
+
+%: ----------------------- abstract ------------------------
+
+% Your institution may have specific regulations if you need an abstract and where it is to be placed in the document. The default here is just after title.
+
+\include{0_frontmatter/zusammenfassung}
+\include{0_frontmatter/abstract}
+
+
+%: ----------------------- tie in front matter ------------------------
+
+%\frontmatter
+\include{0_frontmatter/erklärung.tex}
+\include{0_frontmatter/acknowledgement}
+
+
+%: ----------------------- contents ------------------------
+\tableofcontents            % print the table of contents
+
+%: ----------------------- list of figures/tables ------------------------
+\cleardoublepage
+\listoffigures	% print list of figures
+\cleardoublepage
+\listoftables  % print list of tables
+
+
+%: --------------------------------------------------------------
+%:                  MAIN DOCUMENT SECTION
+% --------------------------------------------------------------
+
+\mainmatter
+
+%: ----------------------- subdocuments ------------------------
+
+% Parts of the thesis are included below. Rename the files as required.
+% But take care that the paths match. You can also change the order of appearance by moving the include commands.
+% \cfchapter[short name] {full name} {folder name} {file name}.
+\cfchapter{Introduction}{1_introduction}{introduction}
+\cfchapter{Problem}{2}{problem}
+\cfchapter{Background and Related Work}{3}{background}
+\cfchapter{Runtime Enforcement / Runtime Compliance}{4}{compliance}
+\cfchapter{Requirements}{5}{requirements}
+\cfchapter{General Approach}{6}{approach}
+\cfchapter{Implementation}{7}{implementation}
+\cfchapter{Evaluation}{8}{evaluation}
+\cfchapter{Discussion \& Conclusion}{9}{discussion_conclusion}
+\cleardoublepage
+       % description of lab methods
+
+
+
+% --------------------------------------------------------------
+%:                  BACK MATTER: appendices, refs,..
+% --------------------------------------------------------------
+
+% the back matter: appendix and references close the thesis
+
+
+%: ----------------------- bibliography ------------------------
+
+% The section below defines how references are listed and formatted
+% The default below is one column, small font, complete author names.
+% Entries are also linked back to the page number in the text and to external URL if provided in the BibTex file.
+
+\begin{footnotesize} % tiny(5) < scriptsize(7) < footnotesize(8) < small (9)
+
+\ifCLASSINFOlangDE
+%\renewcommand{\bibname}{References}
+\else
+\renewcommand{\bibname}{References} % changes the header; default: Bibliography
+\fi
+% add bib to toc
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{\bibname}
+
+\ifCLASSINFObiblatex
+\printbibliography
+\else
+% PhDbiblio-url2 = names small caps, title bold & hyperlinked, link to page 
+\bibliographystyle{Classes/PhDbiblio-url2} % Title is link if provided
+%\bibliographystyle{apalike}
+\bibliography{backmatter/references} % adjust this to fit your BibTex file
+\fi
+\end{footnotesize}
+
+\end{document}

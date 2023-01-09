@@ -1,0 +1,22 @@
+% -*- root: ../thesis.tex -*-
+%!TEX root = ../thesis.tex
+% ******************************* Thesis Chapter 8 ****************************
+
+
+% ----------------------- paths to graphics ------------------------
+
+% change according to folder and file names
+\graphicspath{{8/figures/}}
+% ----------------------- contents from here ------------------------
+
+Since no comparable framework exists, it is hard to compare this software to others.
+However, to fulfill the goal of the thesis, the working end-product should be seen as a result. 
+The evaluation should therefore determine, to which degree the outputs of the Hawk framework can be integrated and if all requirements, as specified in the requirements section, are fulfilled. This evaluation should specifically focus on the DLP input abstraction and the new Hawk module. \\
+
+Figure \ref{fig:bpmn} shows how the evaluation of the Hawk framework will be done. An exemplary microservice application will be used as a data source here. In the first step of the figure, dumps of the databases will be taken and sent to the chosen DLP technology. In the next step, the DLP will process the data externally. When finished, the respective Hawk DLP input will read the results with the vendor-specific API. The third step then processes these results and sends them to the Hawk service. In the fourth step, inside the Hawk service, the results get annotated with all the information coming from the Hawk modules. The annotated results will then be saved in a database and are accessible via. the Hawk API. Qualitative analysis is then collected, by comparing the data present in the exemplary microservice application and the data displayed by the respective outputs, which use the Hawk API.\\
+
+In the end, everyone should be able to install the new Hawk framework in their own cluster and use the features themselves.
+
+% ---------------------------------------------------------------------------
+%: ----------------------- end of thesis sub-document ------------------------
+% ---------------------------------------------------------------------------
