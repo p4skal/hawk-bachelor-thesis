@@ -9,24 +9,85 @@
 \graphicspath{{3/figures/}}
 % ----------------------- contents from here ------------------------
 
-\section{Privacy and Transparency}
-\section{GDPR Requirements}
+\section{Regulatory Requirements}
+As mentioned in the introduction, this thesis focuses on the GDPR. Besides regulating how companies/institutions process personal data, the GDPR also imposes those entities with obligations such as accountability obligations, reporting obligations, and ensuring data security and Data Subject rights. Infringements of the provisions can lead to fines of up to 4 percent of the worldwide annual turnover. Amazon, for example, was punished with a 746,000,000 euro fine in July of 2021 because of a target advertising system that is not compliant with the GDPR \cite{bodoni_amazon_nodate}\cite{european_commission_antitrust_nodate}. 
+
+A particularly relevant Article in this thesis is Article 13, which states the following:
+
+\begin{quote}
+"Where personal data relating to a data subject are collected from the data
+subject, the controller shall, at the time when personal data are obtained,
+provide the data subject with all of the following information: [...]"
+\end{quote}
+
+\begin{table}[h]
+    \centering
+    \begin{tabularx}{\linewidth}{ lXX }
+        \textbf{Paragraph} & \textbf{Description} & \textbf{Extra} \\
+        \hline
+        a & identity and contact details of controller & Or controllers representative \\
+        \hline
+        b & contact details of data protection officer & Where applicable  \\
+        \hline
+        c & purpose of the processing for which personal data & \\
+        \hline
+        c & legal basis for processing for which personal data & \\
+        \hline
+        d & processing based on (Article 6(1)) & \\
+        \hline
+        d & legitimate interests pursued by controller & Or third party \\
+        \hline
+        e & recipients/categories of recipients of personal data & if any \\
+        \hline
+        f & where personal data is transferred to (third country or international organization) & Existence or absence of an adequacy decision by the Commission \\
+        \hline
+    \end{tabularx}
+    \caption{Information to provide to the data subject by the controller when personal data are obtained according to Art. 13 \cite{noauthor_review_nodate}}
+    \label{tab:gdpr_art_13_1}
+\end{table}
+To summarize, each company processing data digitally must disclose information about which personal data indicators \todo{cite: pallas und finck} are collected and for what purpose, etc. When revisiting the requirements and possible fines with the topics mentioned in the previous section about Microservices architectures, it becomes evident why this is a big challenge for companies to overcome. Therefore, specific technical measures were developed, which are explained in the next section.
+
+Another motivation for this thesis is Article 25, which states that measures with "reasonable" implementation costs should be realized. When better technologies regarding the principles of the GDPR are available for companies to use, the bar will be raised.
+
 \section{Data Loss Prevention}
+The introduction explains that Data Loss Prevention (DLP) covers many technologies. Because of the diversity and overlapping of functions of different technologies, we divide each tool into its features. Each feature reads and processes data from a data source and produces metadata related to the input data in the scope of sensitivity, privacy, or security. Such a feature can be the data identification/inspection feature, which scans the data source for information like email addresses and credit card numbers and produces the information type and location for each so-called finding. Another feature is the analyzation feature that outputs meta-information like the k parameter in the k-anonymity model. 
+
+The inspection feature, particularly relevant to this thesis, is present in many DLP technologies. Besides the data source, another thing that can be abstracted in the inspection feature is the data format. For instance, all table-based data is typically treated similarly among those technologies, whether the data source is a database or a CSV file in a storage bucket. Other data formats are, e.g., document-based data, metadata, and images. When collecting the findings, the data format influences the format of the locator of the finding inside the file.
+
+\begin{table}[h]
+    \centering
+    \begin{tabularx}{\linewidth}{ lXX }
+        \textbf{id} & \textbf{email} & \textbf{plan} \\
+        \hline
+        12 & person1@tu-berlin.de & PREMIUM \\
+        \hline
+        14 & person2@tu-berlin.de & VIP \\
+        \hline
+        27 & person3@tu-berlin.de & MEMBER \\
+    \end{tabularx}
+    \caption{Examplary customer table in a database}
+    \label{tab:dlp-example-1}
+\end{table}
+
+For instance, when scanning this table, the DLP tool finds three separate email addresses. Each of those findings has an info type, a locator, and a probability depending on the tool. Because of the data format, all three email addresses can be grouped to deduct the info type of the column.
+
 \subsection{AWS Macie}
+
+AWS Macie 2 is a cloud-sourced DLP tool developed and offered by Amazon Web Services\footnote{\url{https://docs.aws.amazon.com/macie/latest/user/what-is-macie.html}}. It supports the previously outlined inspection feature, as shown in the following paragraphs.
+
+
+Similar to other DLP tools, Macie works by providing a Job abstraction. In the case of Macie, the relevant Job for this thesis is the \texttt{Classification Job}. Classification or often referred to as sensitive data discovery is the same concept as data inspection in our case. Since Macie offers a REST API, the management of the classification Job resource can be done using some endpoints. Such a job mainly represents a data source and the process of inspecting it.\footnote{\url{https://docs.aws.amazon.com/macie/latest/APIReference/jobs.html}}. A job can be of type scheduled or one-time, where the latter is the default. Scheduled meaning in this context that the data gets re-inspected on a specific time-based / event-based trigger. When a one-time classification job is created, AWS Macie asynchronously starts processing the content behind it and adds a list of findings to it when completed. Each Macie finding results from the inspection of one file since AWS Macie is limited to analyzing S3 Buckets and therefore files. Besides that, a finding contains a list of sensitive data in this specific file. Nested in that object lies a multi-dimensional list of detection and occurrence objects. Each of those entries represents a finding in the terminology of this thesis. The info type concept is called (managed) data identifier\footnote{\url{https://docs.aws.amazon.com/macie/latest/user/managed-data-identifiers.html}}.
+Macie allows to specify custom data identifiers using regular expressions. It also supports different data formats, which can be distinguished by the properties of the occurrence object. Each entry represents a single finding inside the file of the according type. For table-based files, like CSV or Excel, Macie offers a cells property where each entry contains the column name and row number of the desired finding. Besides the table data format, record and document files also have special support.
+
 \subsection{Google Cloud DLP}
-\subsection{Teiresias}
+Cloud Data Loss Prevention is the second generation of a closed-sourced DLP tool developed and offered by Google Cloud Platform. Similar to Macie, it supports the inspection feature and offers a REST and GRPC API.
 
 
-%\begin{figure}[htb]
-%  \centering
-%
-%\def\svgwidth{8cm}
+CDLP provides multiple ways of inspecting data. One is via. a Dlp Job resource that unlike Macie only represents one execution. Using Job Triggers that internally create Job resources, a scheduled Job similar to AWS Macie can be recreated. It should be noted here though, that the resulting findings are only accessible in a BigQuery database, not via. REST API / GRPC.
+Another way of inspecting data is using the Inspect Content endpoint, which immediately returns findings when called via. API. A finding is bound to both the item processed and the info type discovered. More generally speaking, CDLP can inspect not only files but also databases and custom data sources, in which cases the term item can have different meanings. Each CDLP finding has an info type, a likelihood for that info type, and a list of occurrences. Each occurrence, coupled with the information of the parent CDLP finding represents a finding in the terminology of this thesis. CDLP has location identifiers for records, images, documents, and metadata inside a single item. For instance, the record location has a column name (field id) and row number (record key) for the occurrence found. CDLP therefore additionally supports image and metadata as a data format when compared to Macie.
 
-%  \includegraphics[width=0.95\textwidth]{3/TikzPictures/example1.tikz}
-%  \caption[Tikz Example]{ Tikz Example.} 
-%  \label{fig:tikz_exapmle}
-%\end{figure}
 
+Besides data inspection, CDLP also supports the analyzation feature. 
 
 % ---------------------------------------------------------------------------
 %: ----------------------- end of thesis sub-document ------------------------

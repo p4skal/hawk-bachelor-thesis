@@ -1,0 +1,32 @@
+% -*- root: ../thesis.tex -*-
+%!TEX root = ../thesis.tex
+% this file is called up by thesis.tex
+% content in this file will be fed into the main document
+
+%level followed %by section, subsection
+
+
+% ----------------------- paths to graphics ------------------------
+
+% change according to folder and file names
+\graphicspath{{4/figures/}}
+% ----------------------- contents from here ------------------------
+
+With transparency at runtime, we describe tools that support compliance with data protection regulations such as the GDPR at runtime. For instance, one example of it could be a technology that monitors the handling of personal data inside an application.  The result could then be used e.g. by the data protection officer to ensure compliance with the GDPR.
+
+Article 25, number 2 of GDPR says the following:
+\begin{quote}
+    The controller shall implement appropriate technical and organisational measures for ensuring that, by default, only personal data which are necessary for each specific purpose of the processing are processed. That obligation applies to the amount of personal data collected, the extent of their processing, the period of their storage and their accessibility. In particular, such measures shall ensure that by default personal data are not made accessible without the individual's intervention to an indefinite number of natural persons.
+\end{quote}
+
+Derived from that, it can be said, that technical measures, such as transparency at runtime tools are intended by the GDPR.
+However, not many of these tools exist right now.
+
+\section{Hawk project}
+The Hawk project offers, with its Hawk framework, such a tool. Hawk's core feature is called traffic analysis and works by inspecting the HTTP data flow between services and mapping those requests/responses to pre-defined entities. More technically speaking, Hawk parses each HTTP message and extracts all data locators from it. When for example, JSON is submitted in the body, Hawk will extract and save a JSON path to each atomic value. With the concept of fields and mappings, an email field can be created, which then can be mapped to a specific HTTP request/response, based on path, direction, and e.g. JSON path inside the packet. When integrated properly, all of those mappings are always up-to-date and therefore support the data protection officer in ensuring that e.g. all storage constraints communicated to the customer are met. Besides that, Hawk can be used to monitor how, when, and where a field is being transported.
+
+% merge with approach %
+% ---------------------------------------------------------------------------
+%: ----------------------- end of thesis sub-document ------------------------
+% ---------------------------------------------------------------------------
+

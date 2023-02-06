@@ -9,13 +9,23 @@
 \graphicspath{{2/figures/}}
 % ----------------------- contents from here ------------------------
 
-As stated above, the core problem is the relatively low usage of transparency-enhancing technologies. Below is a list of  possible reasons: \\
+As the introduction explores, companies processing large quantities of personal data often need technical measures to meet regulatory requirements. This is not always done right, as some of the recent fines given to companies because of not complying with the regulatory framework suggest. For this reason, transparency-enhancing technologies (TETs) help simplify the effort needed to implement these changes. Mainly relevant for this case are TETs that collect metadata in cloud-native architectures.
+However, especially those TETs are not very common yet. That is why the primary goal of this thesis is to help increase the usage of TETs.
 
-\noindent\textbf{No single technology can draw the complete picture} Meaning no single technology can solve the purpose of identifying and inspecting the personal data flow to a point, that, e.g., a data protection impact assessment can be generated.\\
+To understand the reason for the relatively low usage better, we will first revisit the concept of TETs.
+TETs are tools that (a) provide information about data collection, analysis, and usage of personal data to the data subject or (b) support a data-protection officer or the authorities in these regards \cite{zimmermann_categorization_2015}. Many of these technologies exist and can be grouped into specific categories. Often multiple choices for TETs of the same category exist. Some of them are available as open-source software, while many others are closed-source and only available through paying. All of this leads to the following possible reasons.
 
-\noindent\textbf{Missing abstraction layer} There are different technologies available, that solve the same purpose but have completely different APIs, which are hard to interchange. This is especially problematic for closed-source technologies, which create a vendor lock-in effect using this practice.\\
+\section{Complete picture}
+Up to this point, no single technology can draw the complete picture. This means no single TET can collect meta-information from every viable source, which results in multiple TETs being needed to achieve the desired state of transparency in many cases. For instance, Data Protection Impact Assessments (DPIAs) that are mandatory for many companies need a big data basis for the data protection officer to be able to conduct the report.
 
-\noindent\textbf{Implementation effort} A problem is the often low cost-benefit ratio. For example, with DLP, both a way to forward the data that should be analyzed to the DLP tool and a way to display the results of that DLP tool afterward must be found and in many cases custom implemented. This then "only" helps to report possible security/privacy flaws. For example, \parencite[Art. 25]{noauthor_general_2016} says, that only measures with "reasonable" implementation costs should be realized
+\section{Implementation effort} 
+Another problem with the integration of TETs is the often low cost-benefit ratio. 
+For example, with DLP, both a way to forward the data that should be analyzed to the DLP tool and a way to use/display the results of that DLP tool afterward must be found. This is often done programmatically by using the API of the TET.
+This then "only" helps to report possible security/privacy flaws. For example, \parencite[Art. 25]{noauthor_general_2016} says that only measures with "reasonable" implementation costs should be realized.
+
+\section{Abstraction layer}
+As mentioned above, different TETs are available that do the same things but have different APIs. For example, there are many DLP tools available that share a big set of features and functions but are different in terms of API connectivity.
+This can lead to a problem when interchanging a similar TET with another. It is especially problematic for closed-source TETs that create a vendor lock-in effect using this practice. \todo{add example technology where this occurs}
 
 % ---------------------------------------------------------------------------
 % ----------------------- end of thesis sub-document ------------------------

@@ -9,22 +9,22 @@
 \graphicspath{{5/figures/}}
 % ----------------------- contents from here ------------------------
 
-This thesis focuses on solving the reasons mentioned above for the relatively low usage of privacy-enhancing technologies. \\
+This thesis focuses on solving the reasons mentioned above for the relatively low usage of transparency-enhancing technologies.
 
-This is realized by creating a framework that combines multiple privacy-enhancing technologies with the following functional requirements:
+This is realized by creating a framework that combines multiple transparency-enhancing technologies with the following functional requirements:
 \begin{enumerate}
-    \item The possibility to embed inputs and input abstractions must be created. Each input abstraction represents a particular category of technologies. One such input abstraction can for example be a DLP input abstraction. Each input represents a concrete technology of an input abstraction. For example Google Cloud DLP in case of the DLP input abstraction. Since each input abstraction features a predefined schema and each input must follow this schema, the missing abstraction layer/lock-in effect problem is solved. This makes it possible to, e.g., replace AWS Macie with Google Cloud DLP without changing anything above, because both inputs are based on the DLP input abstraction.
-    \item The framework must also feature so-called modules, that annotate data, coming from the inputs. One such module must label the data of each input with a source service to enable interoperability between data of different inputs from different input abstractions. This module will be called cluster detection module.
-    \item A uniform API must be created, to insert data from inputs and query this data with the annotations added by the modules. Based on that API, outputs such as visualizations, report generation tools, or completely different downstream applications can be created. This reduces the implementation overhead by a lot, because the operator only needs to plug the new software into the framework, without doing complicated configuration for, e.g., web interfaces.
+    \item The possibility to embed inputs and input abstractions must be created. Each input abstraction represents a particular category of technologies. One such input abstraction can for example be a DLP input abstraction. Each input represents a concrete technology of an input abstraction. For example Google Cloud DLP in the case of the DLP input abstraction. Since each input abstraction features a predefined schema and each input must follow this schema, the missing abstraction layer/lock-in effect problem can be solved. This makes it possible to, e.g., replace AWS Macie with Google Cloud DLP without changing the layers above because both inputs are based on the DLP input abstraction.
+    \item The framework must also feature so-called modules that annotate data coming from the inputs. One such module must label the data of each input with a source service to enable interoperability between data of different inputs from input abstractions. This module will be called cluster detection module. It is required to combine the results of different input abstractions.
+    \item A uniform API must be created to insert data from inputs and query this data with the annotations added by the modules. Based on that API, outputs such as visualizations, report generation tools, or completely different downstream applications can be created. This reduces the implementation overhead by a lot because the operator only needs to plug the new software into the framework without doing complicated configuration for, e.g., web interfaces.
 \end{enumerate}
-The following non-functional requirements should also be met:
+The following non-functional requirements should also be considered:
 \begin{enumerate}
-    \item The framework must be extensible with relatively low effort, to enable new possibilities. Meaning, adding new input abstractions or modules must be possible.
-    \item The project must be open-source and through documentation, it should be engaging in contributing.
+    \item The framework must be extensible with relatively low effort to enable new possibilities. Meaning adding new input abstractions or modules must be possible to reduce the barrier of contribution for outsiders. 
+    \item The project must be open-source, and through documentation, it should be engaging in contributing.
     \item The framework should be designed to run in cloud-native environments, e.g., in Kubernetes clusters.
 \end{enumerate}
 
-Through the combination and interoperability of different technologies, a complete picture can be achieved.
+Through the combination and interoperability of different technologies, it might be possible that a complete picture can be achieved.
 
 % ---------------------------------------------------------------------------
 %: ----------------------- end of thesis sub-document ------------------------

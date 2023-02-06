@@ -1381,6 +1381,7 @@ supported!}
 \newsavebox{\@PHDtitle}
 \begin{lrbox}{\@PHDtitle}
   \begin{minipage}[c]{0.98\textwidth}
+  \includegraphics[width=3cm,height=2cm]{Logo.pdf}
   %\vspace*{-10ex}
     \centering \Huge \singlespacing \bfseries{\@title}
     \\
@@ -1401,8 +1402,9 @@ supported!}
 \begin{lrbox}{\@PHDauthor}
 \begin{minipage}[c]{\textwidth}
   {\Large \centering \singlespacing
-      {{vorgelegt von} \par}
       {{\@author} \par}
+      {{459126} \par}
+      {{paesler\@campus.tu-berlin.de} \par}
   }
   \end{minipage}
 \end{lrbox}
@@ -1414,7 +1416,7 @@ supported!}
   \vspace*{1ex}
     {{Information Systems Engineering} \par}
     {{Fakult\"at IV - Elektrotechnik und Informatik} \par}
-    {{Technischen Universit\"at Berlin} \par}
+    {{Technische Universit\"at Berlin} \par}
   \vspace*{1ex}
 }
   \end{minipage}
@@ -1428,8 +1430,9 @@ supported!}
   {{Elias Gr\"unewald, M.Sc.} \par}
   {{Karl Wolf, M.Sc.} \par}
   \vspace*{3ex}
-  {{Examiner:} \par}
+  {{Examiners:} \par}
   {{Prof. Dr.-Ing. Stefan Tai} \par}
+  {{Prof. Dr. Axel Küpper} \par}
 }%end large
   \end{minipage}
 \end{lrbox}
