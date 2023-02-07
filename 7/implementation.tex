@@ -136,7 +136,7 @@ It can be found on GitHub at \url{https://github.com/PrivacyEngineering/hawk-ser
 \begin{figure}[!htb]
   \centering
 
-  \includegraphics[width=0.95\columnwidth]{hawk-service-file.png}
+  \includegraphics[width=0.8\columnwidth]{hawk-service-file.png}
 
   \caption[Hawk Service file structure]{Filestructure of Hawk Service project showing Domain-Driven-Design}  
   \label{fig:hawk-dlp-uml}
@@ -167,13 +167,13 @@ The traffic analysis endpoints are similar to the previous Hawk Framework, with 
 The new Hawk Framework also features a REST API that is similar to that of the Hawk DLP input. However, since the Jobs and Job results are persisted in the Hawk Service and tagged with metadata, some more information is available at the Hawk Service. Also, results of multiple DLP inputs can be viewed, which is helpful if, e.g., a Multi-Cloud Environment is present. The DLP API in the Hawk Service features a Job insert endpoint, typically called by the DLP inputs to submit Job changes. There is no endpoint for initiating a Job, as this needs to be done at the respective input directly.
 
 \subsubsection{Application [Output]}
-As explained in the cluster detection module section, the Hawk Service tags incoming objects, such as Processing activities or Jobs with their respective App name extracted from the Cloud Environment. To enable the synergy effects of different input abstractions, the Hawk API offers endpoints for querying data by application name. Using these endpoints, the "complete picture" mentioned in the problem section can be achieved if enough input abstractions are present. Since this is only an aggregation of data inserted in other endpoint groups, no input endpoints are available here.
+As explained in the cluster detection module section, the Hawk Service tags incoming objects, such as Processing activities or Jobs, with their respective App name extracted from the Cloud Environment. To enable the synergy effects of different input abstractions, the Hawk API offers endpoints for querying data by application name. Using these endpoints, the "complete picture" mentioned in the problem section can be achieved if enough input abstractions are present. Since this is only an aggregation of data inserted in other endpoint groups, no input endpoints are available here.
 
 With everything implemented, the Hawk Framework will look like this:
 \begin{figure}[!htb]
   \centering
 
-  \includegraphics[width=0.95\columnwidth]{hawk-dlp-uml.png}
+  \includegraphics[width=0.95\columnwidth]{hawk.png}
 
   \caption[Hawk architecture]{The Hawk architecture diagram, with all the new parts, focused on this thesis marked blue.}  
   \label{fig:hawk}
